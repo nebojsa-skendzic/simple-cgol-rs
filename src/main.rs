@@ -125,6 +125,20 @@ impl Grid {
         }
     }
 
+    fn randomize_custom(&mut self, seed: u32) {
+        let mut iterator = 1;
+
+        for i in self.grid.iter_mut() {
+            for j in i.iter_mut() {
+                if ((2355 * (seed-iterator) + 1122) % 9925) / 1000 >= 5 {
+                    *j = ALIVE;
+                }
+                iterator += 1;
+            }
+        }
+
+    }
+
     //Combines all above functions in order to provide an easy way to run the game
     fn run(&mut self, frame_time: f32) {
         loop {
@@ -168,6 +182,6 @@ fn main() {
     grid.set(0,3); */
 
 
-    grid.run(0.25); 
+    grid.run(0.25); //float
 
 } 
